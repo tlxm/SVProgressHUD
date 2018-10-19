@@ -23,6 +23,20 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.activityCount = 0;
+    
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
+    [SVProgressHUD setInfoImage:[UIImage imageNamed:@""]];
+    [SVProgressHUD setErrorImage:[UIImage imageNamed:@""]];
+    [SVProgressHUD setSuccessImage:[UIImage imageNamed:@""]];
+    [SVProgressHUD setCornerRadius:4];
+    [SVProgressHUD setMinimumDismissTimeInterval:2.0];
+    
+    [SVProgressHUD setRingThickness:2];
+    [SVProgressHUD setRingRadius:12];
+    [SVProgressHUD setRingNoTextRadius:12];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +91,7 @@
 }
 
 - (void)showWithStatus {
-	[SVProgressHUD showWithStatus:@"Doing Stuff"];
+	[SVProgressHUD showWithStatus:@"努力加载中"];
     self.activityCount++;
 }
 

@@ -11,6 +11,7 @@
 @interface SVIndefiniteAnimatedView ()
 
 @property (nonatomic, strong) CAShapeLayer *indefiniteAnimatedLayer;
+@property (nonatomic, strong) CALayer *centerImageLayer;
 
 @end
 
@@ -18,11 +19,24 @@
 
 - (void)willMoveToSuperview:(UIView*)newSuperview {
     if (newSuperview) {
+        [self layoutCenterImageLayer];
         [self layoutAnimatedLayer];
     } else {
         [_indefiniteAnimatedLayer removeFromSuperlayer];
         _indefiniteAnimatedLayer = nil;
+        
+        [_centerImageLayer removeFromSuperlayer];
+        _centerImageLayer = nil;
     }
+}
+
+- (void)layoutCenterImageLayer {
+    CALayer *layer = self.centerImageLayer;
+    [self.layer addSublayer:layer];
+    
+    CGFloat widthDiff = CGRectGetWidth(self.bounds) - CGRectGetWidth(layer.bounds);
+    CGFloat heightDiff = CGRectGetHeight(self.bounds) - CGRectGetHeight(layer.bounds);
+    layer.position = CGPointMake(CGRectGetWidth(self.bounds) - CGRectGetWidth(layer.bounds) / 2 - widthDiff / 2, CGRectGetHeight(self.bounds) - CGRectGetHeight(layer.bounds) / 2 - heightDiff / 2);
 }
 
 - (void)layoutAnimatedLayer {
@@ -32,6 +46,21 @@
     CGFloat widthDiff = CGRectGetWidth(self.bounds) - CGRectGetWidth(layer.bounds);
     CGFloat heightDiff = CGRectGetHeight(self.bounds) - CGRectGetHeight(layer.bounds);
     layer.position = CGPointMake(CGRectGetWidth(self.bounds) - CGRectGetWidth(layer.bounds) / 2 - widthDiff / 2, CGRectGetHeight(self.bounds) - CGRectGetHeight(layer.bounds) / 2 - heightDiff / 2);
+}
+
+- (CALayer *)centerImageLayer {
+    if (!_centerImageLayer) {
+        
+        NSBundle *bundle = [NSBundle bundleForClass:[SVProgressHUD class]];
+        NSURL *url = [bundle URLForResource:@"SVProgressHUD" withExtension:@"bundle"];
+        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+        NSString *path = [imageBundle pathForResource:@"center-pai@2x" ofType:@"png"];
+        
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        _centerImageLayer = imageView.layer;
+    }
+    return _centerImageLayer;
 }
 
 - (CAShapeLayer*)indefiniteAnimatedLayer {
@@ -101,6 +130,7 @@
         [super setFrame:frame];
         
         if(self.superview) {
+            [self layoutCenterImageLayer];
             [self layoutAnimatedLayer];
         }
     }
@@ -114,7 +144,11 @@
         [_indefiniteAnimatedLayer removeFromSuperlayer];
         _indefiniteAnimatedLayer = nil;
         
+        [_centerImageLayer removeFromSuperlayer];
+        _centerImageLayer = nil;
+        
         if(self.superview) {
+            [self layoutCenterImageLayer];
             [self layoutAnimatedLayer];
         }
     }
