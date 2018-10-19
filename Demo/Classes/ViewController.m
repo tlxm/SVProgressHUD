@@ -27,9 +27,9 @@
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
-    [SVProgressHUD setInfoImage:[UIImage imageNamed:@""]];
-    [SVProgressHUD setErrorImage:[UIImage imageNamed:@""]];
-    [SVProgressHUD setSuccessImage:[UIImage imageNamed:@""]];
+    [SVProgressHUD setInfoImage:nil];
+    [SVProgressHUD setErrorImage:nil];
+    [SVProgressHUD setSuccessImage:nil];
     [SVProgressHUD setCornerRadius:4];
     [SVProgressHUD setMinimumDismissTimeInterval:2.0];
     
