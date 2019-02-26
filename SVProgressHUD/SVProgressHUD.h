@@ -92,9 +92,9 @@ typedef void (^SVProgressHUDDismissCompletion)(void);
 + (void)setBackgroundLayerColor:(nonnull UIColor*)color;            // default is [UIColor colorWithWhite:0 alpha:0.5], only used for SVProgressHUDMaskTypeCustom
 + (void)setImageViewSize:(CGSize)size;                              // default is 28x28 pt
 + (void)setShouldTintImages:(BOOL)shouldTintImages;                 // default is YES
-+ (void)setInfoImage:(nonnull UIImage*)image;                       // default is the bundled info image provided by Freepik
-+ (void)setSuccessImage:(nonnull UIImage*)image;                    // default is the bundled success image provided by Freepik
-+ (void)setErrorImage:(nonnull UIImage*)image;                      // default is the bundled error image provided by Freepik
++ (void)setInfoImage:(nullable UIImage*)image;                       // default is the bundled info image provided by Freepik
++ (void)setSuccessImage:(nullable UIImage*)image;                    // default is the bundled success image provided by Freepik
++ (void)setErrorImage:(nullable UIImage*)image;                      // default is the bundled error image provided by Freepik
 + (void)setViewForExtension:(nonnull UIView*)view;                  // default is nil, only used if #define SV_APP_EXTENSIONS is set
 + (void)setGraceTimeInterval:(NSTimeInterval)interval;              // default is 0 seconds
 + (void)setMinimumDismissTimeInterval:(NSTimeInterval)interval;     // default is 5.0 seconds
