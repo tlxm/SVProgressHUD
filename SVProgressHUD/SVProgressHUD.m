@@ -232,12 +232,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 + (void)showProgress:(float)progress status:(NSString*)status {
-    //Begin
-    //为了兼容以前的代码,添加了特别的定制
-    [self dismiss];
     [self setBackgroundColor:[UIColor clearColor]];
     [self setForegroundColor:[UIColor lightGrayColor]];
-    //End
     [[self sharedView] showProgress:progress status:status];
 }
 
@@ -325,12 +321,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 + (void)showImage:(UIImage*)image status:(NSString*)status {
-    //Begin
-    //为了兼容以前的代码,添加了特别的定制
-    [self dismiss];
-    [self setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
-    [self setForegroundColor:[UIColor whiteColor]];
-    //End
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     NSTimeInterval displayInterval = [self displayDurationForString:status];
     [[self sharedView] showImage:image status:status duration:displayInterval];
 }
