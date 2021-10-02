@@ -232,6 +232,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 + (void)showProgress:(float)progress status:(NSString*)status {
+    // 优信拍业务定制，在下次toast前先隐藏
+    [self dismiss];
     [self setBackgroundColor:[UIColor clearColor]];
     [self setForegroundColor:[UIColor lightGrayColor]];
     [[self sharedView] showProgress:progress status:status];
@@ -321,6 +323,8 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 + (void)showImage:(UIImage*)image status:(NSString*)status {
+    // 优信拍业务定制，在下次toast前先隐藏
+    [SVProgressHUD dismiss];
     [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.8]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     NSTimeInterval displayInterval = [self displayDurationForString:status];
